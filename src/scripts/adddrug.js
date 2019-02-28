@@ -27,6 +27,7 @@ class AddDrug {
     });
 
     const dynamicInputIndications = document.querySelector('#indications');
+
     const dynamicInputDosages = document.querySelector('#dosages');
   }
 }

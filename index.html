@@ -31,17 +31,47 @@
     </div>
 
     <div class="content">
-		<div class="content__heading">
-			<div class="content__heading__section">
-				<h1 class="content__heading__title">Drugs Inventory</h1>
-				<small class="content__heading__subtitle">Total number of drugs recorded: <span>00</span></small>
-			</div>
-			<div class="content__heading__section">
-				<button class="btn" id="add-new-drug-btn">
-					New Drug
-				</button>
-			</div>
-		</div>
+      <div class="content__heading">
+        <div class="content__heading__section">
+          <h1 class="content__heading__title">Drugs Inventory</h1>
+          <small class="content__heading__subtitle">Total number of drugs recorded: <span>00</span></small>
+        </div>
+        <div class="content__heading__section">
+          <button class="btn" id="add-new-drug-btn">
+            New Drug
+          </button>
+        </div>
+      </div>
+
+      <div class="content__body"> 
+        <!-- <form action="/" id="del-form"> -->
+          <div id="card_body">
+          
+        <!-- <div class="card">
+          <div class="card__section">
+            <h5 class="card__title">Drug Name Goes Here</h5>
+            <div class="card__meta">
+              Toxic to: <span class="red">HEART</span>, <span class="orange">KIDNEY</span>
+            </div>
+            <div class="card__meta">
+              Breast-Feeding Category: <span class="grey">1 - Compatible</span>
+            </div>
+            <div class="card__meta">
+              Pregnancy Category: <span class="grey">A</span>, <span class="grey">B</span>
+            </div>
+          </div> -->
+          <!-- <div class="card__section">
+            <button class="btn btn--light">
+              Edit
+            </button>
+            <button class="btn btn--danger" id="delete-drug-btn">
+              Delete
+            </button>
+          </div> -->
+        <!-- </div> -->
+          </div>
+        <!-- </form>  -->
+      </div>
     </div>
 
     <div class="modal" id="form-modal">
@@ -278,8 +308,12 @@
           </div>
         </form>
       </div>
+
+
   </body>
 </html>
 
+
 <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>

@@ -6,8 +6,8 @@ class UpdateDrug {
     const formUpdateModal= document.querySelector('#form-update-modal');
     const formModalCloseBtn = formUpdateModal.querySelector('.modal__close');
     const formModalCancelBtn = formUpdateModal.querySelector('.btn-cancel');
-    const formModalUpdateBtn = formUpdateModal.querySelector('.btn-update');
     const body = document.body;
+    const formModalUpdateBtn = formUpdateModal.querySelector('.btn-update');
   
     editDrugBtn.addEventListener('click', () => {
       formUpdateModal.classList.toggle('is-active');
@@ -26,6 +26,8 @@ class UpdateDrug {
       body.classList.toggle('modal-open');
       editDrugBtn.focus();
     });
+  
+
   }
 }
 
