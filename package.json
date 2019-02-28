@@ -6,7 +6,7 @@
   "scripts": {
     "heroku-postbuild": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config webpack.dev.js --mode development --host 0.0.0.0",
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.dev.js --mode development --host 0.0.0.0",
     "build": "webpack --config webpack.prod.js --mode production ",
     "preview": "npm run build && http-server dist"
   },
