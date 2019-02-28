@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <title>COSMAS &bull; CMS</title>
+  </head>
+  <body class="page">
+    <div class="nav">
+      <div class="nav__section">
+        <h4 class="nav__title">
+          University Of Santo Tomas
+          <span>Faculty of Pharmacy</span>
+        </h4>
+      </div>
+      <div class="nav__section">
+        <ul class="nav__menu">
+          <li class="nav__menu__item">
+            <a href="#" class="nav__menu__link">
+              Account Settings
+            </a>
+          </li>
+          <li class="nav__menu__item">
+            <a href="#" class="nav__menu__link">
+              Log Out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="content__heading">
+        <div class="content__heading__section">
+          <h1 class="content__heading__title">Drugs Inventory</h1>
+          <small class="content__heading__subtitle">Total number of drugs recorded: <span>00</span></small>
+        </div>
+        <div class="content__heading__section">
+          <button class="btn" id="add-new-drug-btn">
+            New Drug
+          </button>
+        </div>
+      </div>
+
+      <div class="content__body"> 
+        <div id="card_body">
+        <!-- <div class="card">
+          <div class="card__section">
+            <h5 class="card__title">Drug Name Goes Here</h5>
+            <div class="card__meta">
+              Toxic to: <span class="red">HEART</span>, <span class="orange">KIDNEY</span>
+            </div>
+            <div class="card__meta">
+              Breast-Feeding Category: <span class="grey">1 - Compatible</span>
+            </div>
+            <div class="card__meta">
+              Pregnancy Category: <span class="grey">A</span>, <span class="grey">B</span>
+            </div>
+          </div> -->
+          <!-- <div class="card__section">
+            <button class="btn btn--light">
+              Edit
+            </button>
+            <button class="btn btn--danger" id="delete-drug-btn">
+              Delete
+            </button>
+          </div> -->
+        <!-- </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="form-modal">
+      <form action="/" id="drug-form">
+        <button type="button" class="btn btn--light modal__close">X</button>
+        <h3 class="modal__title">New Drug</h3>
+        <div class="modal__content">
+          <div class="form-group">
+            <label for="name">Drug Name: <span class="red">*</span></label>
+            <input type="text" name="name" id="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="toxicity">Toxicity: <span class="red">*</span></label>
+            <div class="row" id="toxicity">
+              <div class="col">
+                <label for="heart" class="row">
+                  <input type="checkbox" name="toxicity" id="heart" value="heart"/>
+                  Heart
+                </label>
+              </div>
+              <div class="col">
+                <label for="kidney" class="row">
+                  <input type="checkbox" name="toxicity" id="kidney" value="kidney"/>
+                  Kidney
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="breast">Breast-Feeding Category: <span class="red">*</span></label>
+            <select name="breast" id="breast" required>
+              <option value="1">1. Compatible</option>
+              <option value="2">2. Use with Caution</option>
+              <option value="3">3. Unknown with Concerns</option>
+              <option value="X">X. Contraindicated</option>
+              <option value="?">?. Safety not established</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="pregnancy">Pregnancy Categories: <span class="red">*</span></label>
+            <div class="row" id="pregnancy">
+              <div class="col">
+                <label for="cat-a" class="row">
+                  <input type="checkbox" name="pregnancy" id="cat-a" value="A" onClick="return KeepCount()"/>
+                  Category A
+                </label>
+              </div>
+              <div class="col">
+                <label for="cat-b" class="row">
+                  <input type="checkbox" name="pregnancy" id="cat-b" value="B" onClick="return KeepCount()"/>
+                  Category B
+                </label>
+              </div>
+              <div class="col">
+                <label for="cat-c" class="row">
+                  <input type="checkbox" name="pregnancy" id="cat-c" value="C" onClick="return KeepCount()"/>
+                  Category C
+                </label>
+              </div>
+              <div class="col">
+                <label for="cat-d" class="row">
+                  <input type="checkbox" name="pregnancy" id="cat-d" value="D" onClick="return KeepCount()"/>
+                  Category D
+                </label>
+              </div>
+			  <div class="col">
+                <label for="cat-x" class="row">
+                  <input type="checkbox" name="pregnancy" id="cat-x" value="X" onClick="return KeepCount()"/>
+                  Category X
+                </label>
+              </div>
+			  <div class="col">
+                <label for="cat-u" class="row">
+                  <input type="checkbox" name="pregnancy" id="cat-u" value="?" onClick="return KeepCount()"/>
+                  Category ?
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row row--space">
+              <div class="col">
+                <label for="indications">Indications: <span class="red">*</span></label>
+                <div class="dynamic-input">
+                  <div class="dynamic-input__item">
+                      <textarea name="indications[]" id="indications" required></textarea>
+                    <!-- <input type="text" name="indications[]" /> -->
+                  </div>
+                  <!-- <button type="button" class="btn btn--sm btn--light btn-new">+</button>
+                  <button type="button" class="btn btn--sm btn--light-danger btn-remove">-</button> -->
+                </div>
+              </div>
+              <div class="col">
+                <label for="dosages">Available Dosages: <span class="red">*</span></label>
+                <div class="dynamic-input">
+                  <div class="dynamic-input__item">
+                    <!-- <input type="text" name="dosages[]" /> -->
+                    <textarea name="dosages[]" id="dosages" required></textarea>
+                  </div>
+                  <!-- <button type="button" class="btn btn--sm btn--light btn-new">+</button>
+                  <button type="button" class="btn btn--sm btn--light-danger btn-remove">-</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal__footer">
+          <button type="button" class="btn btn--light btn-cancel">Cancel</button>
+          <button type="submit" class="btn btn-save">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal modal--sm" id="delete-modal" >
+      <button class="btn btn--light modal__close">x</button>
+      <h3 class="modal__title">Delete Drug</h3>
+      <p>Are you sure you want to delete <span class="red">Drug Name Goes Here</span>?</p>
+      <div class="modal__footer">
+        <button class="btn btn--light btn-cancel">Cancel</button>
+        <button class="btn btn--danger" class="btn btn-delete">Delete</button>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
