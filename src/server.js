@@ -6,6 +6,6 @@ express()
 //.use(express.static(path.join(__dirname, 'src/styles')))
 //.set('view engine', 'ejs')
 .get('/', (req, res) {
-	res.send('hello world')
+	res.send('index')
 })
 .listen(PORT, () => console.log(`Listening on ${ PORT }`))
