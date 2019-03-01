@@ -6,7 +6,7 @@ module.exports = {
     devtool: 'eval-cheap-module-source-map',
     entry: './src/index.js',
     devServer: {
-        port: 8080,
+        port: process.env.PORT || 8080,
         contentBase: path.join(__dirname, "dist")
     },
     node: {
