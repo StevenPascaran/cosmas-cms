@@ -1,6 +1,6 @@
 const express = require('express');
-const path = require('path');
 const PORT = process.env.PORT || 8080;
+const path = require('path');
 
 express().get('/', (req, res) => {
   res.send('root route');

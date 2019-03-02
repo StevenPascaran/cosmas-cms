@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "node ./src/server.js",
     "build": "webpack --config webpack.prod.js --mode production",
     "preview": "npm run build && http-server dist"
   },
@@ -15,10 +15,12 @@
   },
   "keywords": [],
   "author": "",
+  "proxy": "http://localhost:8080",
   "license": "ISC",
   "dependencies": {
     "firebase": "^5.8.4",
-	"express": "^4.9.8"
+	"express": "^4.9.8",
+	"ejs": "~1.0.0"
   },
   "devDependencies": {
     "ajv": "^6.3.0",
