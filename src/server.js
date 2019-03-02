@@ -2,7 +2,7 @@ const express = require('express');
 const PORT = process.env.PORT || 8080;
 const path = require('path');
 
-express().get('/src/index.html', (req, res) => {
+express().get('/', (req, res) => {
   res.send('root route');
 });
 
