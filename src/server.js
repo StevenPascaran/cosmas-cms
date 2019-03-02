@@ -7,5 +7,5 @@ express.get('/', (req, res) => {
 });
 
 express.listen(PORT, (res,req) => {
-
+	console.log(`Listening on ${ PORT }`)
 });
