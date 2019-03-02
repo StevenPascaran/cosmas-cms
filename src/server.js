@@ -6,6 +6,6 @@ express.get('/', (req, res) => {
   res.send('root route');
 })
 
-express().listen(PORT, (res,req) => {
+express.listen(PORT, (res,req) => {
 	console.log(`Listening on ${ PORT }`))
 });
