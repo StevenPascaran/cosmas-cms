@@ -32,6 +32,5 @@ class AddDrug {
     const dynamicInputDosages = document.querySelector('#dosages');
   }
 }
-
 //export default AddDrug;
 module.exports = AddDrug;

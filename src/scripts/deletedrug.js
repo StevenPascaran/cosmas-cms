@@ -10,15 +10,15 @@ class DeleteDrug {
     const body = document.body;
     const formModalDeleteBtn = delModal.querySelector('.btn-delete');
 
-    // deleteDrugBtn.addEventListener('click', (e) => {
-    //   e.preventDefault();
-      
-    //   delModal.classList.toggle('is-active');
-    //   body.classList.toggle('modal-open');
-    //   formModalCloseBtn.focus();
-    // });
+    deleteDrugBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      delModal.classList.toggle('is-active');
+      body.classList.toggle('modal-open');
+      formModalCloseBtn.focus();
+    });
 
-    formModalCloseBtn.addEventListener('click', () => {
+    formModalCloseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       delModal.classList.toggle('is-active');
       body.classList.toggle('modal-open');
       deleteDrugBtn.focus();
