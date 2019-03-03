@@ -1,4 +1,5 @@
-import * as _firebase from 'firebase';
+//import * as _firebase from 'firebase';
+var _firebase = require("./scripts/firebase");
 
   const config = {
 // The other Firebase	  
@@ -20,4 +21,5 @@ import * as _firebase from 'firebase';
 
 const firebase = _firebase.initializeApp(config);
 
-export default firebase;
+//export default firebase;
+module.exports = firebase;

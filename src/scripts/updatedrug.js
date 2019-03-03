@@ -1,4 +1,5 @@
-import * as _firebase from 'firebase';
+//import * as _firebase from 'firebase';
+var _firebase = require("./scripts/firebase");
 
 class UpdateDrug {
   init() {
@@ -31,4 +32,5 @@ class UpdateDrug {
   }
 }
 
-export default UpdateDrug;
+//export default UpdateDrug;
+module.exports = UpdateDrug;
