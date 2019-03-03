@@ -6,7 +6,7 @@ const indexjs = require('./src/index');
 
 server.set('port', PORT);
 
-server.use(express.static(path.join(__dirname, 'src')));
+server.use(express.static(path.join(__dirname, './')));
 
 server.get('/', (req, res)=>{
 	res.sendFile(__dirname + '/index.html');
