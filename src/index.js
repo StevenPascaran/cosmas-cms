@@ -1,4 +1,5 @@
-import AddDrug from './scripts/adddrug';
+var AddDrug = require("./scripts/adddrug")
+//import AddDrug from './scripts/adddrug';
 import DeleteDrug from './scripts/deletedrug';
 import UpdateDrug from './scripts/updatedrug';
 import './styles/app.scss';
