@@ -2,7 +2,7 @@ var AddDrug = require("./scripts/adddrug");
 var DeleteDrug = require("./scripts/deletedrug");
 var UpdateDrug = require("./scripts/updatedrug");
 var firebase = require("./scripts/firebase");
-require("./styles/global.scss");
+//require("./styles/global.scss");
 //import AddDrug from './scripts/adddrug';
 //import DeleteDrug from './scripts/deletedrug';
 //import UpdateDrug from './scripts/updatedrug';
