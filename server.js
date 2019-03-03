@@ -2,15 +2,14 @@ const express = require('express');
 const server = express();
 const PORT = process.env.PORT || 8080;
 const path = require('path');
-const indexjs = require('./src/index');
 
 server.set('port', PORT);
 
-server.use(express.static(path.join(__dirname, 'src')));
+server.use(express.static(path.join(__dirname, 'dist')));
 
 server.get('/', (req, res)=>{
-	res.render('index');
-	//res.sendFile(__dirname + '/index.html');
+	//res.render('index');
+	res.sendFile(__dirname + '/index.html');
 });
 
 //Express error handling middleware
