@@ -35,7 +35,8 @@ if(typeof document !== "undefined")
   }
 }
 
-}
-
 //export default AddDrug;
 module.exports = AddDrug;
+
+}
+
