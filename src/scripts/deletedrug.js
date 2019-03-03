@@ -1,5 +1,5 @@
-//import * as _firebase from 'firebase';
-import _firebase = require("./scripts/firebase");
+import * as _firebase from 'firebase';
+//import _firebase = require("./scripts/firebase");
 
 class DeleteDrug {
   init() {
@@ -38,5 +38,5 @@ class DeleteDrug {
   }
 }
 
-//export default DeleteDrug;
-module.exports = DeleteDrug;
+export default DeleteDrug;
+//module.exports = DeleteDrug;
