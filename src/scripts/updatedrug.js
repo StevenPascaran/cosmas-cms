@@ -1,5 +1,5 @@
 //import * as _firebase from 'firebase';
-var firebase = require("./scripts/firebase");
+var firebase = require("./firebase");
 
 class UpdateDrug {
   init() {
