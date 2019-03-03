@@ -1,9 +1,7 @@
 //import * as _firebase from 'firebase';
 var firebase = require("./firebase");
 
-if(typeof document !== "undefined")
-{
-	class AddDrug {
+class AddDrug {
   init() {
     const addDrugBtn = document.querySelector('#add-new-drug-btn');
     const formModal = document.querySelector('#form-modal');
@@ -37,6 +35,3 @@ if(typeof document !== "undefined")
 
 //export default AddDrug;
 module.exports = AddDrug;
-
-}
-

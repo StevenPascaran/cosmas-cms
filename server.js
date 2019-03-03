@@ -9,7 +9,8 @@ server.set('port', PORT);
 server.use(express.static(path.join(__dirname, 'src')));
 
 server.get('/', (req, res)=>{
-	res.sendFile(__dirname + '/index.html');
+	res.render('index');
+	//res.sendFile(__dirname + '/index.html');
 });
 
 //Express error handling middleware
