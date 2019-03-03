@@ -3,7 +3,7 @@ const server = express();
 const PORT = process.env.PORT || 8080;
 //const path = require('path');
 
-server.set('port', process.env.PORT || 3000);
+server.set('port', PORT);
 
 server.get('/', (req, res)=>{
   res.send('Home Page');
