@@ -32,5 +32,5 @@ class UpdateDrug {
   }
 }
 
-export default UpdateDrug;
-//module.exports = UpdateDrug;
+//export default UpdateDrug;
+module.exports = UpdateDrug;
