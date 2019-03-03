@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8080;
 //});
 
 const http = require('http'),
-      server = http.createServer(),
+      //server = http.createServer(),
 	  url = require('url');
 
 makeServer = function (request,response){
