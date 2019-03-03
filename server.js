@@ -1,13 +1,14 @@
 const express = require('express');
 const server = express();
 const PORT = process.env.PORT || 8080;
-//const path = require('path');
+const path = require('path');
 const indexjs = require('./src/index');
 
 server.set('port', PORT);
 
+server.use(express.static(path.join(__dirname, 'src')));
+
 server.get('/', (req, res)=>{
-	res.json(indexjs);
 	res.sendFile(__dirname + '/index.html');
 });
 
