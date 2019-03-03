@@ -1,9 +1,13 @@
-var AddDrug = require("./scripts/adddrug")
+var AddDrug = require("./scripts/adddrug");
+var DeleteDrug = require("./scripts/deletedrug");
+var UpdateDrug = require("./scripts/updatedrug");
+var firebase = require("./scripts/firebase");
+//require("./styles/app.scss");
 //import AddDrug from './scripts/adddrug';
-import DeleteDrug from './scripts/deletedrug';
-import UpdateDrug from './scripts/updatedrug';
+//import DeleteDrug from './scripts/deletedrug';
+//import UpdateDrug from './scripts/updatedrug';
 import './styles/app.scss';
-import firebase from './scripts/firebase';
+//import firebase from './scripts/firebase';
 
 const _addDrug = new AddDrug();
 _addDrug.init();
