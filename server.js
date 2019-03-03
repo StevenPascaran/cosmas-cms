@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8080;
 server.set('port', PORT);
 
 server.get('/', (req, res)=>{
-  res.sendFile(__dirname + './index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 server.get('/about',(req,res)=>{
