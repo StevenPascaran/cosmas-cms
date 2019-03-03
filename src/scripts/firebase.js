@@ -1,5 +1,5 @@
 //import * as _firebase from 'firebase';
-var _firebase = require("./scripts/firebase");
+import _firebase = require("./scripts/firebase");
 
   const config = {
 // The other Firebase	  
