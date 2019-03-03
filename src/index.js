@@ -297,3 +297,6 @@ formModalSaveBtn.addEventListener('click', () => {
          });
       });
     };
+    
+
+// CMS UPDATE FUNCTION
