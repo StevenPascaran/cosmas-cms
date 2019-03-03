@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"build-css": "node-sass --include-path scss src/styles/global.scss src/styles/main.css"
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server.js",
     "build": "webpack --config webpack.prod.js --mode production",
