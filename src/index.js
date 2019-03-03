@@ -69,234 +69,231 @@ formModalSaveBtn.addEventListener('click', () => {
      
   });
 
-    const displayDrugs = () => {
-      database.ref().once("value", (snapshot) => {
-        drugs = snapshot.val().drugs;
-        keys = Object.keys(drugs);
+const displayDrugs = () => {
+  database.ref().once("value", (snapshot) => {
+	drugs = snapshot.val().drugs;
+	keys = Object.keys(drugs);
 
-        keys.forEach((key) => {
-          var name = drugs[key].Name;
-          const toxic_to = drugs[key].toxicity_to;
-          const breastfeeding_category = drugs[key].breastfeeding_category;
-          const pregnancy_category = drugs[key].pregnancy_category;
-          const indications = drugs[key].indications;
-          const dosages = drugs[key].dosages;
-          drugId = key;
+	keys.forEach((key) => {
+	  var name = drugs[key].Name;
+	  const toxic_to = drugs[key].toxicity_to;
+	  const breastfeeding_category = drugs[key].breastfeeding_category;
+	  const pregnancy_category = drugs[key].pregnancy_category;
+	  const indications = drugs[key].indications;
+	  const dosages = drugs[key].dosages;
+	  drugId = key;
 
-            // $("#card_body").append(`
-            const div = `
-                <div class="card">
-                  <div class="card__section" data-id="${key}">
-                    <h5 class="card__title">${name}</h5>
-                    <div class="card__meta">
-                      Toxic to: <span class="red">${toxic_to}</span>
-                    </div>
-                    <div class="card__meta">
-                      Breast-Feeding Category: <span class="grey">${breastfeeding_category}</span>
-                    </div>
-                    <div class="card__meta">
-                      Pregnancy Category: <span class="grey">${pregnancy_category}</span>
-                    </div>
-                    <div class="card__meta"> 
-                      Indications: <span class="grey"> <pre> ${indications} </pre> </span>
-                    </div>
-                    <div class="card__meta">
-                      Dosages: <span class="grey"> <pre> ${dosages} </pre> </span>
-                    </div>
-                  </div>
-                  <div class="card__section">
-                    <button class="btn btn--light edit-drug-btn">
-                      Edit 
-                    </button>
-                    <button class="btn btn--danger delete-drug-btn">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-            `;   
-            card_body.innerHTML += div;
-           
+		// $("#card_body").append(`
+		const div = `
+			<div class="card">
+			  <div class="card__section" data-id="${key}">
+				<h5 class="card__title">${name}</h5>
+				<div class="card__meta">
+				  Toxic to: <span class="red">${toxic_to}</span>
+				</div>
+				<div class="card__meta">
+				  Breast-Feeding Category: <span class="grey">${breastfeeding_category}</span>
+				</div>
+				<div class="card__meta">
+				  Pregnancy Category: <span class="grey">${pregnancy_category}</span>
+				</div>
+				<div class="card__meta"> 
+				  Indications: <span class="grey"> <pre> ${indications} </pre> </span>
+				</div>
+				<div class="card__meta">
+				  Dosages: <span class="grey"> <pre> ${dosages} </pre> </span>
+				</div>
+			  </div>
+			  <div class="card__section">
+				<button class="btn btn--light edit-drug-btn">
+				  Edit 
+				</button>
+				<button class="btn btn--danger delete-drug-btn">
+				  Delete
+				</button>
+			  </div>
+			</div>
+		`;   
+		card_body.innerHTML += div;
+	   
 
-            bindEvents();
-        });
+		bindEvents();
+	});
 
-        const deleteDrugBtn = document.querySelector('.delete-drug-btn');
-        const delModal = document.querySelector('#delete-modal');
-        const formModalCloseBtn = delModal.querySelector('.modal__close');
-        const formModalCancelBtn = delModal.querySelector('.btn-cancel');
-        const body = document.body;
-        const formModalDeleteBtn = delModal.querySelector('.btn-delete');
+	const deleteDrugBtn = document.querySelector('.delete-drug-btn');
+	const delModal = document.querySelector('#delete-modal');
+	const formModalCloseBtn = delModal.querySelector('.modal__close');
+	const formModalCancelBtn = delModal.querySelector('.btn-cancel');
+	const body = document.body;
+	const formModalDeleteBtn = delModal.querySelector('.btn-delete');
 
-        deleteDrugBtn.addEventListener('click', () => {
-          delModal.classList.toggle('is-active');
-          body.classList.toggle('modal-open');
-          formModalCloseBtn.focus();
+	deleteDrugBtn.addEventListener('click', () => {
+	  delModal.classList.toggle('is-active');
+	  body.classList.toggle('modal-open');
+	  formModalCloseBtn.focus();
 
-          bindEvents();
+	  bindEvents();
 
-          cardBody = Array.from(document.querySelectorAll('.card__section'));
-          cardBody.forEach((key) => {
-            key.addEventListener('click', () => {
-              const id = key.getAttribute('data-id'); 
-              var name = drugs[id].Name;
+	  cardBody = Array.from(document.querySelectorAll('.card__section'));
+	  cardBody.forEach((key) => {
+		key.addEventListener('click', () => {
+		  const id = key.getAttribute('data-id'); 
+		  var name = drugs[id].Name;
 
-              var drugname = document.getElementById("drugName");
-              drugname.innerText = name;
-            });
-          });
+		  var drugname = document.getElementById("drugName");
+		  drugname.innerText = name;
+		});
+	  });
 
-          if(activeID){
-            database.ref(`drugs/${activeID}`).remove();
-          
-            if(!error){
-              database.ref().once("value", (snapshot) => {
-              drugs = snapshot.val().drugs;
-              keys = Object.keys(drugs);
+	  if(activeID){
+		database.ref(`drugs/${activeID}`).remove();
+	  
+		if(!error){
+		  database.ref().once("value", (snapshot) => {
+		  drugs = snapshot.val().drugs;
+		  keys = Object.keys(drugs);
 
-              window.alert("Deleted Successfully!");
+		  window.alert("Deleted Successfully!");
 
-              delModal.classList.remove('is-active');
-              body.classList.remove('modal-open');
-              
-              activeID = null;
+		  delModal.classList.remove('is-active');
+		  body.classList.remove('modal-open');
+		  
+		  activeID = null;
 
-              displayDrugs();
-              });
-            }
-        };
-        });
+		  displayDrugs();
+		  });
+		}
+	};
+	});
 
-        formModalCloseBtn.addEventListener('click', () => {
-          delModal.classList.toggle('is-active');
-          body.classList.toggle('modal-open');
-          deleteDrugBtn.focus();
-        });
-    
-        formModalCancelBtn.addEventListener('click', () => {
-          delModal.classList.toggle('is-active');
-          body.classList.toggle('modal-open');
-          deleteDrugBtn.focus();
-        });
+	formModalCloseBtn.addEventListener('click', () => {
+	  delModal.classList.toggle('is-active');
+	  body.classList.toggle('modal-open');
+	  deleteDrugBtn.focus();
+	});
 
-        // _updateDrug.init();
-        // _deleteDrug.init();
-        
-      }); 
-    }; 
+	formModalCancelBtn.addEventListener('click', () => {
+	  delModal.classList.toggle('is-active');
+	  body.classList.toggle('modal-open');
+	  deleteDrugBtn.focus();
+	});
 
-    displayDrugs();
+	// _updateDrug.init();
+	// _deleteDrug.init();
+	
+  }); 
+}; 
 
-    const clearList = () => {
-      cardBody.forEach((card) => {
-          card.innerHTML = "";
-      });
-    };
+displayDrugs();
 
-    const bindEvents = () => {
-      cardBody = Array.from(document.querySelectorAll('.card__section'));
+const clearList = () => {
+  cardBody.forEach((card) => {
+	  card.innerHTML = "";
+  });
+};
 
-      const drugForm = document.querySelector('#edit-form');
-      const inputName = drugForm.querySelector('#name');
-      const inputCatBreast = drugForm.querySelector('#breast');
-      const inputIndications = drugForm.querySelector('#indications');
-      const inputDosages = drugForm.querySelector('#dosages');
-      const formModal = document.querySelector('#form-modal');
-      const formModalSaveBtn = formModal.querySelector('.btn-save');
+const bindEvents = () => {
+  cardBody = Array.from(document.querySelectorAll('.card__section'));
 
-      
-      cardBody.forEach((key) => {
-         key.addEventListener('click', () => {
-            const id = key.getAttribute('data-id'); 
-            var name = drugs[id].Name;
-            const toxic_to = drugs[id].toxicity_to;
-            const breastfeeding_category = drugs[id].breastfeeding_category;
-            const pregnancy_category = drugs[id].pregnancy_category;
-            const indications = drugs[id].indications;
-            const dosages = drugs[id].dosages;
+  const drugForm = document.querySelector('#edit-form');
+  const inputName = drugForm.querySelector('#name');
+  const inputCatBreast = drugForm.querySelector('#breast');
+  const inputIndications = drugForm.querySelector('#indications');
+  const inputDosages = drugForm.querySelector('#dosages');
+  const formModal = document.querySelector('#form-modal');
+  const formModalSaveBtn = formModal.querySelector('.btn-save');
 
-              activeID = id;
-              inputName.value = name;
-              inputCatBreast.value = breastfeeding_category;
-              // toxicity = toxic_to;
-              // cat_pregnancy = pregnancy_category;
-              inputIndications.value = indications;
-              inputDosages.value = dosages;
+  
+  cardBody.forEach((key) => {
+	 key.addEventListener('click', () => {
+		const id = key.getAttribute('data-id'); 
+		var name = drugs[id].Name;
+		const toxic_to = drugs[id].toxicity_to;
+		const breastfeeding_category = drugs[id].breastfeeding_category;
+		const pregnancy_category = drugs[id].pregnancy_category;
+		const indications = drugs[id].indications;
+		const dosages = drugs[id].dosages;
 
-              const formUpdateModal= document.querySelector('#form-update-modal');
-              const formModalCloseBtn = formUpdateModal.querySelector('.modal__close');
-              const formModalCancelBtn = formUpdateModal.querySelector('.btn-cancel');
-              const body = document.body;
-              const formModalUpdateBtn = formUpdateModal.querySelector('.btn-update');
+		  activeID = id;
+		  inputName.value = name;
+		  inputCatBreast.value = breastfeeding_category;
+		  // toxicity = toxic_to;
+		  // cat_pregnancy = pregnancy_category;
+		  inputIndications.value = indications;
+		  inputDosages.value = dosages;
 
-              formUpdateModal.classList.toggle('is-active');
-              body.classList.toggle('modal-open');
+		  const formUpdateModal= document.querySelector('#form-update-modal');
+		  const formModalCloseBtn = formUpdateModal.querySelector('.modal__close');
+		  const formModalCancelBtn = formUpdateModal.querySelector('.btn-cancel');
+		  const body = document.body;
+		  const formModalUpdateBtn = formUpdateModal.querySelector('.btn-update');
 
-              formModalCloseBtn.addEventListener('click', () => {
-                formUpdateModal.classList.remove('is-active');
-                body.classList.remove('modal-open');
-              });
-            
-              formModalCancelBtn.addEventListener('click', () => {
-                formUpdateModal.classList.remove('is-active');
-                body.classList.remove('modal-open');
-              });
+		  formUpdateModal.classList.toggle('is-active');
+		  body.classList.toggle('modal-open');
 
-              formModalUpdateBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                if(activeID) {
-                    const Name = inputName.value;
-                    const breastfeeding_category = inputCatBreast.value;
-                    const indications = inputIndications.value;
-                    const dosages = inputDosages.value;
-            
-                    var toxicityCheckboxes = document.getElementsByName('toxicity');
-                    var pregnancyCheckboxes = document.getElementsByName('pregnancy');
-                    var toxicity = "";var cat_pregnancy = "";
-                    
-                    for (var i=0, n=toxicityCheckboxes.length;i<n;i++) 
-                      if (toxicityCheckboxes[i].checked) 
-                        toxicity += ","+toxicityCheckboxes[i].value;
-                    if (toxicity) toxicity = toxicity.substring(1);
-                    
-                    for (var i=0, n=pregnancyCheckboxes.length;i<n;i++) 
-                      if (pregnancyCheckboxes[i].checked)
-                        cat_pregnancy += ", "+pregnancyCheckboxes[i].value;
-                    if (cat_pregnancy) cat_pregnancy = cat_pregnancy.substring(1);
+		  formModalCloseBtn.addEventListener('click', () => {
+			formUpdateModal.classList.remove('is-active');
+			body.classList.remove('modal-open');
+		  });
+		
+		  formModalCancelBtn.addEventListener('click', () => {
+			formUpdateModal.classList.remove('is-active');
+			body.classList.remove('modal-open');
+		  });
 
-                    database.ref(`drugs/${activeID}`).update({
-                        'Name': Name,
-                        'breastfeeding_category': breastfeeding_category,
-                        'toxicity_to': toxicity,
-                        'pregnancy_category': cat_pregnancy,
-                        'indications':indications,
-                        'dosages': dosages
-                    }, (error) => {
-                      if(!error){
-                        database.ref().once("value", (snapshot) => {
-                        drugs = snapshot.val().drugs;
-                        keys = Object.keys(drugs);
+		  formModalUpdateBtn.addEventListener('click', (e) => {
+			e.preventDefault();
+			
+			if(activeID) {
+				const Name = inputName.value;
+				const breastfeeding_category = inputCatBreast.value;
+				const indications = inputIndications.value;
+				const dosages = inputDosages.value;
+		
+				var toxicityCheckboxes = document.getElementsByName('toxicity');
+				var pregnancyCheckboxes = document.getElementsByName('pregnancy');
+				var toxicity = "";var cat_pregnancy = "";
+				
+				for (var i=0, n=toxicityCheckboxes.length;i<n;i++) 
+				  if (toxicityCheckboxes[i].checked) 
+					toxicity += ","+toxicityCheckboxes[i].value;
+				if (toxicity) toxicity = toxicity.substring(1);
+				
+				for (var i=0, n=pregnancyCheckboxes.length;i<n;i++) 
+				  if (pregnancyCheckboxes[i].checked)
+					cat_pregnancy += ", "+pregnancyCheckboxes[i].value;
+				if (cat_pregnancy) cat_pregnancy = cat_pregnancy.substring(1);
 
-                        // clearList();
+				database.ref(`drugs/${activeID}`).update({
+					'Name': Name,
+					'breastfeeding_category': breastfeeding_category,
+					'toxicity_to': toxicity,
+					'pregnancy_category': cat_pregnancy,
+					'indications':indications,
+					'dosages': dosages
+				}, (error) => {
+				  if(!error){
+					database.ref().once("value", (snapshot) => {
+					drugs = snapshot.val().drugs;
+					keys = Object.keys(drugs);
 
-                        displayDrugs();
+					// clearList();
 
-                        window.alert("Update Successful!");
+					displayDrugs();
 
-                        formUpdateModal.classList.remove('is-active');
-                        body.classList.remove('modal-open');
-                        
-                        activeID = null;
-                        });
-                      }
-                    });
-                  }
-                });
+					window.alert("Update Successful!");
+
+					formUpdateModal.classList.remove('is-active');
+					body.classList.remove('modal-open');
+					
+					activeID = null;
+					});
+				  }
+				});
+			  }
+			});
 
 
-         });
-      });
-    };
-    
-
-// CMS UPDATE FUNCTION
+	 });
+  });
+};
