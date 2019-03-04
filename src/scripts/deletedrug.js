@@ -29,12 +29,6 @@ class DeleteDrug {
       body.classList.toggle('modal-open');
       deleteDrugBtn.focus();
     });
-
-    // formModalDeleteBtn.addEventListener('click', () => {
-    //   var rootRef = this.database().ref().child("drugs");
-    //   rootRef.remove();
-    // });
-
   }
 }
 

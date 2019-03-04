@@ -10,7 +10,7 @@ var _firebase = require("firebase");
 //    storageBucket: "cosmas-2f2bd.appspot.com",
 //    messagingSenderId: "143917050684"
 
-// Pharma email Firebase
+// Pharma email Realtime Firebase
     apiKey: "AIzaSyCgOk3WYYt613qTjNCGZ3pNdJun8Yp3spQ",
     authDomain: "cosmas-8d860.firebaseapp.com",
     databaseURL: "https://cosmas-8d860.firebaseio.com",

@@ -7,10 +7,10 @@
 	<style>
 	@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700');
 	</style>
-
     <title>COSMAS &bull; CMS</title>
   </head>
   <body class="page">
+	<!-- NAV BAR -->
     <div class="nav">
       <div class="nav__section">
         <h4 class="nav__title">
@@ -20,21 +20,46 @@
       </div>
       <div class="nav__section">
         <ul class="nav__menu">
-          <li class="nav__menu__item">
-            <a href="#" class="nav__menu__link">
-              Account Settings
+          <li class="nav__menu__item logged-in">
+            <a href="#" id="logout" class="nav__menu__link">
+              Log Out
             </a>
           </li>
-          <li class="nav__menu__item">
-            <a href="#" class="nav__menu__link">
-              Log Out
+		  <li class="nav__menu__item logged-out ">
+            <a href="#" id="login-btn" class="nav__menu__link modal-trigger" data-target="modal-login">
+              Log In
             </a>
           </li>
         </ul>
       </div>
     </div>
-
-    <div class="content">
+	<!-- NAV BAR END -->
+	
+	<!-- LOG IN MODAL -->
+	<div class="modal" id="modal-login">
+      <form id="login-form">
+        <button type="button" class="btn btn--light modal__close">X</button>
+        <h3 class="modal__title">Log In</h3>
+        <div class="modal__content">
+          <div class="form-group">
+            <label for="name">Email: <span class="red">*</span></label>
+            <input type="email" id="login-email" required />
+          </div>
+		  <div class="form-group">
+            <label for="name">Password: <span class="red">*</span></label>
+            <input type="password" id="login-password" required />
+          </div>
+        </div>
+        <div class="modal__footer">
+          <button type="button" class="btn btn--light btn-cancel">Cancel</button>
+          <button type="submit" class="btn btn-login">Log In</button>
+        </div>
+      </form>
+    </div>
+	<!-- LOG IN MODAL END -->
+	
+	<!-- WHEN LOGGED IN -->
+    <div class="content logged-in">
       <div class="content__heading">
         <div class="content__heading__section">
           <h1 class="content__heading__title">Drugs Inventory</h1>
@@ -47,37 +72,22 @@
         </div>
       </div>
 
-      <div class="content__body"> 
-        <!-- <form action="/" id="del-form"> -->
-          <div id="card_body">
-          
-        <!-- <div class="card">
-          <div class="card__section">
-            <h5 class="card__title">Drug Name Goes Here</h5>
-            <div class="card__meta">
-              Toxic to: <span class="red">HEART</span>, <span class="orange">KIDNEY</span>
-            </div>
-            <div class="card__meta">
-              Breast-Feeding Category: <span class="grey">1 - Compatible</span>
-            </div>
-            <div class="card__meta">
-              Pregnancy Category: <span class="grey">A</span>, <span class="grey">B</span>
-            </div>
-          </div> -->
-          <!-- <div class="card__section">
-            <button class="btn btn--light edit-drug-btn">
-              Edit 
-            </button>
-            <button class="btn btn--danger" id="delete-drug-btn">
-              Delete
-            </button>
-          </div> -->
-        <!-- </div> -->
-          </div>
-        <!-- </form>  -->
+		<div class="content__body"> 
+			  <div id="card_body">
+			  </div>
+		</div>
+    </div>
+	<!-- WHEN LOGGED IN END -->
+	
+	<!-- WHEN LOGGED OUT -->
+    <div class="content logged-out">
+       <div class="content__heading">
+          <h1 class="content__heading__title" >PLEASE LOG IN TO GAIN ACCESS TO THE CONTENT</h1>
       </div>
     </div>
-
+	<!-- WHEN LOGGED OUT END -->
+	
+	<!-- ADD DRUG MODAL -->
     <div class="modal" id="form-modal">
       <form action="/" id="drug-form">
         <button type="button" class="btn btn--light modal__close">X</button>
@@ -192,7 +202,9 @@
         </div>
       </form>
     </div>
-
+	<!-- ADD DRUG MODAL END -->
+	
+	<!-- DELETE DRUG MODAL -->
     <div class="modal modal--sm" id="delete-modal">
         <button class="btn btn--light modal__close">x</button>
         <h3 class="modal__title">Delete Drug</h3>
@@ -202,8 +214,9 @@
           <button type="submit" class="btn btn--danger btn-delete">Delete</button>
         </div>
     </div>
-
-
+	<!-- DELETE DRUG MODAL END -->
+	
+	<!-- UPDATE DRUG MODAL -->
     <div class="modal" id="form-update-modal">
         <form action="/" id="edit-form">
           <button type="button" class="btn btn--light modal__close">X</button>
@@ -314,12 +327,10 @@
           </div>
         </form>
       </div>
-
-
+	<!-- UPDATE DRUG MODAL END -->
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
   </body>
 </html>
-
-
-<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.1.0.js"></script>

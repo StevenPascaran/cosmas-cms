@@ -287,6 +287,16 @@ input[type="text"] {
   padding: 12px 15px;
 }
 
+input[type="password"] {
+  width: calc(100% - 40px);
+  padding: 12px 15px;
+}
+
+input[type="email"] {
+  width: calc(100% - 40px);
+  padding: 12px 15px;
+}
+
 input[type="checkbox"] {
   margin-right: 10px;
 }

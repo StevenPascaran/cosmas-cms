@@ -1,8 +1,10 @@
 var AddDrug = require("./scripts/adddrug");
 var DeleteDrug = require("./scripts/deletedrug");
 var UpdateDrug = require("./scripts/updatedrug");
+var LogIn = require("./scripts/Login");
 var firebase = require("./scripts/firebase");
-require("../dist/styles.703cc3633356eefa8621.css");
+var auth = require("./scripts/auth");
+require("../dist/styles.83cb382b03466a945063.css");
 //require("./styles/global.scss");
 //import AddDrug from './scripts/adddrug';
 //import DeleteDrug from './scripts/deletedrug';
@@ -16,11 +18,20 @@ _addDrug.init();
 const _deleteDrug = new DeleteDrug();
 const _updateDrug = new UpdateDrug();
 
+const _Login = new LogIn();
+_Login.init();
+const _Auth = new auth();
+_Auth.init();
+
 const database = firebase.database();
 let activeID;
 let drugId;
 let drugs, keys;
 let cardBody;
+
+// CMS LOG IN MODAL
+const loginformModal = document.querySelector('#modal-login');
+const formModalLoginBtn = loginformModal.querySelector('.btn-login');
 
 // CMS TO ADD NEW DRUG
 const cards = Array.from(document.querySelectorAll('#card_body'));
@@ -60,7 +71,6 @@ formModalSaveBtn.addEventListener('click', (e) => {
      }, (error) => {
       if(!error){
       window.alert("Saved Successfully!");
-
       formModal.classList.remove('is-active');
       window.location.reload(true); //CODE TO REFRESH PAGE
       }
@@ -290,7 +300,6 @@ const deleteDrug = () => {
     deleteDrugBtn.focus();
   });
 }
-
 
 // CMS CLEAR DATA
 
