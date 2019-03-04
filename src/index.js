@@ -6,18 +6,11 @@ var firebase = require("./scripts/firebase");
 var auth = require("./scripts/auth");
 require("../dist/styles.83cb382b03466a945063.css");
 //require("./styles/global.scss");
-//import AddDrug from './scripts/adddrug';
-//import DeleteDrug from './scripts/deletedrug';
-//import UpdateDrug from './scripts/updatedrug';
-//import './styles/app.scss';
-//import firebase from './scripts/firebase';
-
-const _addDrug = new AddDrug();
-_addDrug.init();
 
 const _deleteDrug = new DeleteDrug();
 const _updateDrug = new UpdateDrug();
-
+const _addDrug = new AddDrug();
+_addDrug.init();
 const _Login = new LogIn();
 _Login.init();
 const _Auth = new auth();
@@ -44,11 +37,12 @@ const formModal = document.querySelector('#form-modal');
 const formModalSaveBtn = formModal.querySelector('.btn-save');
 
 formModalSaveBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+	e.preventDefault();
 
 	var toxicityCheckboxes = document.getElementsByName('toxicity');
 	var pregnancyCheckboxes = document.getElementsByName('pregnancy');
-	var toxicity = "";var cat_pregnancy = "";
+	var toxicity = "";
+	var cat_pregnancy = "";
 	
 	for (var i=0, n=toxicityCheckboxes.length;i<n;i++) 
 		if (toxicityCheckboxes[i].checked) 
@@ -75,7 +69,7 @@ formModalSaveBtn.addEventListener('click', (e) => {
       window.location.reload(true); //CODE TO REFRESH PAGE
       }
     });
-  });
+});
 
   //CMS TO DISPLAY LIST OF DRUGS
     const displayDrugs = () => {
@@ -92,7 +86,6 @@ formModalSaveBtn.addEventListener('click', (e) => {
           const dosages = drugs[key].dosages;
           drugId = key;
 
-            // $("#card_body").append(`
             const div = `
               <div class="card">
                 <div class="card__section" data-id="${key}">
@@ -114,9 +107,7 @@ formModalSaveBtn.addEventListener('click', (e) => {
                   </div>
                 </div>
                 <div class="card__section">
-                  <button class="btn btn--danger delete-drug-btn">
-                    Delete
-                  </button>
+
                 </div>
               </div>
             `;   
@@ -127,17 +118,12 @@ formModalSaveBtn.addEventListener('click', (e) => {
         });
         // INSERT DELETE FUNCTION HERE
         deleteDrug();
-          // _updateDrug.init();
-          // _deleteDrug.init();
       }); 
     }; 
 
     displayDrugs();
-    //_updateDrug.init();
-    // INSERT UPDATE FUNCTION HERE
     
 // CMS UPDATE FUNCTION
-
 const bindEvents = () => {
   cardBody = Array.from(document.querySelectorAll('.card__section'));
 
@@ -188,16 +174,19 @@ const bindEvents = () => {
       formUpdateModal.classList.toggle('is-active');
       body.classList.toggle('modal-open');
 
-      formModalCloseBtn.addEventListener('click', () => {
+      formModalCloseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         formUpdateModal.classList.remove('is-active');
         body.classList.remove('modal-open');
       });
     
-      formModalCancelBtn.addEventListener('click', () => {
+      formModalCancelBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         formUpdateModal.classList.remove('is-active');
         body.classList.remove('modal-open');
       });
 
+      // INSERT DELETE BTN LISTENER
       formModalUpdateBtn.addEventListener('click', (e) => {
         e.preventDefault();
         
@@ -230,10 +219,8 @@ const bindEvents = () => {
           }, (error) => {
             if(!error){
               window.alert("Update Successful!");
-
               formUpdateModal.classList.remove('is-active');
               window.location.reload(true); //CODE TO REFRESH PAGE
-              
               activeID = null;
             }
           });
@@ -244,57 +231,47 @@ const bindEvents = () => {
 };
 
 // CMS DELETE FUNCTION
-
 const deleteDrug = () => {
-  const deleteDrugBtn = document.querySelector('.delete-drug-btn');
+  const deleteDrugBtn = document.querySelector('#delete-drug-btn');
   const delModal = document.querySelector('#delete-modal');
   const formModalCloseBtn = delModal.querySelector('.modal__close');
   const formModalCancelBtn = delModal.querySelector('.btn-cancel');
   const body = document.body;
   const formModalDeleteBtn = delModal.querySelector('.btn-delete');
+  const formUpdateModal= document.querySelector('#form-update-modal');
 
-  deleteDrugBtn.addEventListener('click', () => {
+  deleteDrugBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    formUpdateModal.classList.remove('is-active');
     delModal.classList.toggle('is-active');
-    body.classList.toggle('modal-open');
-    formModalCloseBtn.focus();
 
-    //bindEvents();
-    cardBody = Array.from(document.querySelectorAll('.card__section'));
-    cardBody.forEach((key) => {
-      key.addEventListener('click', () => {
-        const id = key.getAttribute('data-id'); 
-        var name = drugs[id].Name;
-
-        var drugname = document.getElementById("drugName");
-        drugname.innerText = name;
-      });
-    });
+	var name = drugs[activeID].Name;
+	var drugname = document.getElementById("drugName");
+	drugname.innerText = name;
 
     formModalDeleteBtn.addEventListener('click', (e) => {
       e.preventDefault();
 
       if(activeID){
         database.ref(`drugs/${activeID}`).remove();
-      
-        if(!error){
-          window.alert("Deleted Successfully!");
-
-          delModal.classList.remove('is-active');
-          window.location.reload(true); //CODE TO REFRESH PAGE
-          
-          activeID = null;
-        }
+		window.alert("Deleted Successfully!");
+		delModal.classList.remove('is-active');
+		window.location.reload(true); //CODE TO REFRESH PAGE
+		activeID = null;
       };
     });
   });
 
-  formModalCloseBtn.addEventListener('click', () => {
+  formModalCloseBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     delModal.classList.toggle('is-active');
     body.classList.toggle('modal-open');
     deleteDrugBtn.focus();
   });
 
-  formModalCancelBtn.addEventListener('click', () => {
+  formModalCancelBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     delModal.classList.toggle('is-active');
     body.classList.toggle('modal-open');
     deleteDrugBtn.focus();
@@ -302,7 +279,6 @@ const deleteDrug = () => {
 }
 
 // CMS CLEAR DATA
-
 const clearList = () => {
   cardBody.forEach((card) => {
       card.innerHTML = "";

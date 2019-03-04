@@ -1,4 +1,3 @@
-//import * as _firebase from 'firebase';
 var firebase = require("./firebase");
 
 class UpdateDrug {
@@ -39,10 +38,7 @@ class UpdateDrug {
     const inputCatBreast = editForm.querySelector('#breast');
     const inputIndications = editForm.querySelector('#indications');
     const inputDosages = editForm.querySelector('#dosages');
-    //const formModal = document.querySelector('#form-modal');
-    //const formModalSaveBtn = formModal.querySelector('.btn-save');
-  
-    // var toxicityCheckboxes = document.getElementById('heart');
+
     var toxicityCheckboxes = document.getElementsByName('Toxicity');
   
     cardBody.forEach((key) => {
@@ -72,8 +68,6 @@ class UpdateDrug {
             activeID = id;
             inputName.value = name;
             inputCatBreast.value = breastfeeding_category;
-            // toxicity = toxic_to;
-            // cat_pregnancy = pregnancy_category;
             inputIndications.value = indications;
             inputDosages.value = dosages;
   
