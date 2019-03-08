@@ -63,7 +63,7 @@
       <div class="content__heading">
         <div class="content__heading__section">
           <h1 class="content__heading__title">Drugs Inventory</h1>
-          <small class="content__heading__subtitle">Total number of drugs recorded: <span>00</span></small>
+          <small class="content__heading__subtitle">Total number of drugs recorded: <span id="countTotal"></span></small>
         </div>
         <div class="content__heading__section">
           <button class="btn" id="add-new-drug-btn">
@@ -99,7 +99,7 @@
           </div>
 
           <div class="form-group">
-            <label for="toxicity">Toxicity: <span class="red">*</span></label>
+            <label for="toxicity">Toxicity: </label>
             <div class="row" id="toxicity">
               <div class="col">
                 <label for="heart" class="row">
@@ -132,37 +132,37 @@
             <div class="row" id="pregnancy">
               <div class="col">
                 <label for="cat-a" class="row">
-                  <input type="checkbox" name="pregnancy" id="cat-a" value="A" onClick="return KeepCount()"/>
+                  <input type="checkbox" name="pregnancy" id="cat-a" value="A"/>
                   Category A
                 </label>
               </div>
               <div class="col">
                 <label for="cat-b" class="row">
-                  <input type="checkbox" name="pregnancy" id="cat-b" value="B" onClick="return KeepCount()"/>
+                  <input type="checkbox" name="pregnancy" id="cat-b" value="B"/>
                   Category B
                 </label>
               </div>
               <div class="col">
                 <label for="cat-c" class="row">
-                  <input type="checkbox" name="pregnancy" id="cat-c" value="C" onClick="return KeepCount()"/>
+                  <input type="checkbox" name="pregnancy" id="cat-c" value="C"/>
                   Category C
                 </label>
               </div>
               <div class="col">
                 <label for="cat-d" class="row">
-                  <input type="checkbox" name="pregnancy" id="cat-d" value="D" onClick="return KeepCount()"/>
+                  <input type="checkbox" name="pregnancy" id="cat-d" value="D"/>
                   Category D
                 </label>
               </div>
 			  <div class="col">
                 <label for="cat-x" class="row">
-                  <input type="checkbox" name="pregnancy" id="cat-x" value="X" onClick="return KeepCount()"/>
+                  <input type="checkbox" name="pregnancy" id="cat-x" value="X"/>
                   Category X
                 </label>
               </div>
 			  <div class="col">
                 <label for="cat-u" class="row">
-                  <input type="checkbox" name="pregnancy" id="cat-u" value="?" onClick="return KeepCount()"/>
+                  <input type="checkbox" name="pregnancy" id="cat-u" value="?"/>
                   Category ?
                 </label>
               </div>
@@ -224,12 +224,12 @@
           <div class="modal__content">
             <div class="form-group">
               <label for="name">Drug Name: <span class="red">*</span></label>
-              <input type="text" name="name" id="name" required />
+              <input type="text" name="name" id="Name" required />
             </div>
   
             <div class="form-group">
               <label for="toxicity">Toxicity: <span class="red">*</span></label>
-              <div class="row" id="toxicity">
+              <div class="row" id="Toxicity">
                 <div class="col">
                   <label for="heart" class="row">
                     <input type="checkbox" name="Toxicity" id="heart" value="heart"/>
@@ -247,7 +247,7 @@
   
             <div class="form-group">
               <label for="breast">Breast-Feeding Category: <span class="red">*</span></label>
-              <select name="breast" id="breast" required>
+              <select name="breast" id="Breast" required>
                 <option value="1">1. Compatible</option>
                 <option value="2">2. Use with Caution</option>
                 <option value="3">3. Unknown with Concerns</option>
@@ -258,40 +258,40 @@
   
             <div class="form-group">
               <label for="pregnancy">Pregnancy Categories: <span class="red">*</span></label>
-              <div class="row" id="pregnancy">
+              <div class="row" id="Pregnancy">
                 <div class="col">
                   <label for="cat-a" class="row">
-                    <input type="checkbox" name="Pregnancy" id="cat-a" value="A" onClick="return KeepCount()"/>
+                    <input type="checkbox" name="Pregnancy" id="Cat-a" value="A"/>
                     Category A
                   </label>
                 </div>
                 <div class="col">
                   <label for="cat-b" class="row">
-                    <input type="checkbox" name="Pregnancy" id="cat-b" value="B" onClick="return KeepCount()"/>
+                    <input type="checkbox" name="Pregnancy" id="Cat-b" value="B"/>
                     Category B
                   </label>
                 </div>
                 <div class="col">
                   <label for="cat-c" class="row">
-                    <input type="checkbox" name="Pregnancy" id="cat-c" value="C" onClick="return KeepCount()"/>
+                    <input type="checkbox" name="Pregnancy" id="Cat-c" value="C"/>
                     Category C
                   </label>
                 </div>
                 <div class="col">
                   <label for="cat-d" class="row">
-                    <input type="checkbox" name="Pregnancy" id="cat-d" value="D" onClick="return KeepCount()"/>
+                    <input type="checkbox" name="Pregnancy" id="Cat-d" value="D"/>
                     Category D
                   </label>
                 </div>
           <div class="col">
                   <label for="cat-x" class="row">
-                    <input type="checkbox" name="Pregnancy" id="cat-x" value="X" onClick="return KeepCount()"/>
+                    <input type="checkbox" name="Pregnancy" id="Cat-x" value="X"/>
                     Category X
                   </label>
                 </div>
           <div class="col">
                   <label for="cat-u" class="row">
-                    <input type="checkbox" name="Pregnancy" id="cat-u" value="?" onClick="return KeepCount()"/>
+                    <input type="checkbox" name="Pregnancy" id="Cat-u" value="?"/>
                     Category ?
                   </label>
                 </div>
@@ -304,7 +304,7 @@
                   <label for="indications">Indications: <span class="red">*</span></label>
                   <div class="dynamic-input">
                     <div class="dynamic-input__item">
-                        <textarea name="indications[]" id="indications" required></textarea>
+                        <textarea name="indications[]" id="Indications" required></textarea>
                     </div>
                   </div>
                 </div>
@@ -312,7 +312,7 @@
                   <label for="dosages">Available Dosages: <span class="red">*</span></label>
                   <div class="dynamic-input">
                     <div class="dynamic-input__item">
-                      <textarea name="dosages[]" id="dosages" required></textarea>
+                      <textarea name="dosages[]" id="Dosages" required></textarea>
                     </div>
                   </div>
                 </div>

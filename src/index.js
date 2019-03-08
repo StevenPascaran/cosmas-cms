@@ -4,13 +4,14 @@ var UpdateDrug = require("./scripts/updatedrug");
 var LogIn = require("./scripts/Login");
 var firebase = require("./scripts/firebase");
 var auth = require("./scripts/auth");
-require("../dist/styles.83cb382b03466a945063.css");
+require("../dist/styles.49f64aa5070892c7780b.css");
 //require("./styles/global.scss");
+
+const _addDrug = new AddDrug();
+_addDrug.init();
 
 const _deleteDrug = new DeleteDrug();
 const _updateDrug = new UpdateDrug();
-const _addDrug = new AddDrug();
-_addDrug.init();
 const _Login = new LogIn();
 _Login.init();
 const _Auth = new auth();
@@ -19,7 +20,7 @@ _Auth.init();
 const database = firebase.database();
 let activeID;
 let drugId;
-let drugs, keys;
+let drugs, keys, key;
 let cardBody;
 
 // CMS LOG IN MODAL
@@ -43,6 +44,7 @@ formModalSaveBtn.addEventListener('click', (e) => {
 	var pregnancyCheckboxes = document.getElementsByName('pregnancy');
 	var toxicity = "";
 	var cat_pregnancy = "";
+	var counter = 0;
 	
 	for (var i=0, n=toxicityCheckboxes.length;i<n;i++) 
 		if (toxicityCheckboxes[i].checked) 
@@ -53,7 +55,10 @@ formModalSaveBtn.addEventListener('click', (e) => {
     if (pregnancyCheckboxes[i].checked)
 			cat_pregnancy += ", "+pregnancyCheckboxes[i].value;
 	if (cat_pregnancy) cat_pregnancy = cat_pregnancy.substring(1);
-
+  if (inputName.value == "" || inputIndications.value  == "" || inputDosages.value == ""){
+    alert("Please input values")
+  } 
+  else {
 	var rootRef = firebase.database().ref().child("drugs");
      rootRef.push().set({
        Name:inputName.value,
@@ -69,25 +74,60 @@ formModalSaveBtn.addEventListener('click', (e) => {
       window.location.reload(true); //CODE TO REFRESH PAGE
       }
     });
+  }
+});
+
+// LOG ADDED DATA & SH0W TOTAL # OF DRUGS
+  var count = 0;
+
+  var ref= firebase.database().ref().child("drugs");
+  ref.on("child_added", function(snap) {
+    count++;
+    console.log("added:", snap.key);
+  });
+ 
+  ref.once("value", function(snap) {
+    console.log(count);
+
+    var drugsTotal = document.getElementById("countTotal");
+    drugsTotal.innerText = count;
+  });
+
+  // LOG CHANGED DATA
+  ref.on("child_changed", function(snapshot) {
+    var changedDrug = snapshot.val();
+    console.log(changedDrug.Name + " has been updated");
+  });
+
+  // LOG DELETED DATA
+  ref.on("child_removed", function(snapshot) {
+    var deletedDrug = snapshot.val();
+    console.log(deletedDrug.Name + "' has been deleted");
+  });
+
+ref.orderByChild("Name").on("child_added", function(snapshot) {
+  console.log(snapshot.key + " name " + snapshot.val().Name);
 });
 
   //CMS TO DISPLAY LIST OF DRUGS
     const displayDrugs = () => {
-      database.ref().once("value", (snapshot) => {
-        drugs = snapshot.val().drugs;
-        keys = Object.keys(drugs);
+      ref.orderByChild("Name").on("child_added", function(snapshot) {
+       // drugs = snapshot.val().drugs;
+       // keys = Object.keys(drugs);
 
-        keys.forEach((key) => {
-          var name = drugs[key].Name;
-          const toxic_to = drugs[key].toxicity_to;
-          const breastfeeding_category = drugs[key].breastfeeding_category;
-          const pregnancy_category = drugs[key].pregnancy_category;
-          const indications = drugs[key].indications;
-          const dosages = drugs[key].dosages;
+     //   keys.forEach((key) => {
+      //    var name = drugs[key].Name;
+		  var name = snapshot.val().Name;
+          const toxic_to = snapshot.val().toxicity_to;
+          const breastfeeding_category = snapshot.val().breastfeeding_category;
+          const pregnancy_category = snapshot.val().pregnancy_category;
+          const indications = snapshot.val().indications;
+          const dosages = snapshot.val().dosages;
+          key = snapshot.key;
           drugId = key;
 
             const div = `
-              <div class="card">
+              <div class="card" data-id="${key}">
                 <div class="card__section" data-id="${key}">
                   <h5 class="card__title">${name}</h5>
                   <div class="card__meta">
@@ -100,22 +140,20 @@ formModalSaveBtn.addEventListener('click', (e) => {
                     Pregnancy Category: <span class="grey">${pregnancy_category}</span>
                   </div>
                   <div class="card__meta"> 
-                    Indications: <span class="grey"> <pre> ${indications} </pre> </span>
+                    Indications: 
+					<span class="grey"> <pre> ${indications} </pre> </span>
                   </div>
                   <div class="card__meta">
                     Dosages: <span class="grey"> <pre> ${dosages} </pre> </span>
                   </div>
                 </div>
                 <div class="card__section">
-
                 </div>
               </div>
             `;   
             card_body.innerHTML += div;
              
-            bindEvents();
-            
-        });
+        bindEvents();
         // INSERT DELETE FUNCTION HERE
         deleteDrug();
       }); 
@@ -125,14 +163,18 @@ formModalSaveBtn.addEventListener('click', (e) => {
     
 // CMS UPDATE FUNCTION
 const bindEvents = () => {
-  cardBody = Array.from(document.querySelectorAll('.card__section'));
+  cardBody = Array.from(document.querySelectorAll('.card'));
 
   const editForm = document.querySelector('#edit-form');
-  const inputName = editForm.querySelector('#name');
-  const inputCatBreast = editForm.querySelector('#breast');
-  const inputIndications = editForm.querySelector('#indications');
-  const inputDosages = editForm.querySelector('#dosages');
+  const inputName = editForm.querySelector('#Name');
+  const inputCatBreast = editForm.querySelector('#Breast');
+  const inputIndications = editForm.querySelector('#Indications');
+  const inputDosages = editForm.querySelector('#Dosages');
   const toxicityCheckboxes = document.getElementsByName('Toxicity');
+  const pregnancyCheckboxes = document.getElementsByName('Pregnancy');
+  
+    database.ref().once("value", (snapshot) => {
+    drugs = snapshot.val().drugs;
 
   cardBody.forEach((key) => {
      key.addEventListener('click', () => {
@@ -144,24 +186,23 @@ const bindEvents = () => {
       const indications = drugs[id].indications;
       const dosages = drugs[id].dosages;
 
-      if (toxic_to.includes("heart,kidney")){
-      toxicityCheckboxes[0].checked = true;
-      toxicityCheckboxes[1].checked = true;
-      } else if (toxic_to.includes("heart")){
-      toxicityCheckboxes[0].checked = true;
-      toxicityCheckboxes[1].checked = false;
-      } else if (toxic_to.includes("kidney")){
-      toxicityCheckboxes[0].checked = false;
-      toxicityCheckboxes[1].checked = true;
+      for (var i=0, n=toxicityCheckboxes.length;i<n;i++)
+      if (toxic_to.includes(toxicityCheckboxes[i].value)){
+        toxicityCheckboxes[i].checked = true;
       } else {
-      toxicityCheckboxes[0].checked = false;
-      toxicityCheckboxes[1].checked = false;
+        toxicityCheckboxes[i].checked = false;
+      }
+
+      for (var i=0, n=pregnancyCheckboxes.length;i<n;i++)
+      if (pregnancy_category.includes(pregnancyCheckboxes[i].value)){
+        pregnancyCheckboxes[i].checked = true;
+      } else {
+        pregnancyCheckboxes[i].checked = false;
       }
 
       activeID = id;
       inputName.value = name;
       inputCatBreast.value = breastfeeding_category;
-      // cat_pregnancy = pregnancy_category;
       inputIndications.value = indications;
       inputDosages.value = dosages;
 
@@ -196,7 +237,6 @@ const bindEvents = () => {
           const indications = inputIndications.value;
           const dosages = inputDosages.value;
   
-          var pregnancyCheckboxes = document.getElementsByName('pregnancy');
           var toxicity = "";var cat_pregnancy = "";
           
           for (var i=0, n=toxicityCheckboxes.length;i<n;i++) 
@@ -218,7 +258,7 @@ const bindEvents = () => {
               'dosages': dosages
           }, (error) => {
             if(!error){
-              window.alert("Update Successful!");
+              //window.alert("Update Successful!");
               formUpdateModal.classList.remove('is-active');
               window.location.reload(true); //CODE TO REFRESH PAGE
               activeID = null;
@@ -228,6 +268,7 @@ const bindEvents = () => {
       });
     });
   });
+ });
 };
 
 // CMS DELETE FUNCTION
@@ -277,10 +318,3 @@ const deleteDrug = () => {
     deleteDrugBtn.focus();
   });
 }
-
-// CMS CLEAR DATA
-const clearList = () => {
-  cardBody.forEach((card) => {
-      card.innerHTML = "";
-  });
-};

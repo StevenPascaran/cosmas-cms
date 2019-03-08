@@ -1,4 +1,3 @@
-//import * as _firebase from 'firebase';
 var firebase = require("./firebase");
 
 class AddDrug {
@@ -32,5 +31,5 @@ class AddDrug {
     const dynamicInputDosages = document.querySelector('#dosages');
   }
 }
-//export default AddDrug;
+
 module.exports = AddDrug;

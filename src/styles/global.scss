@@ -311,6 +311,8 @@ input[type="checkbox"] {
 
 .dynamic-input__item {
   textarea {
+    width: calc(100% - 40px);
+    padding: 12px 15px;
     margin-bottom: 10px;
   }
 }
