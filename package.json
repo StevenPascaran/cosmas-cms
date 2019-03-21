@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "firebase": "^5.8.4",
-	"express": "^4.9.8"
+    "express": "^4.9.8"
   },
   "devDependencies": {
     "ajv": "^6.3.0",
