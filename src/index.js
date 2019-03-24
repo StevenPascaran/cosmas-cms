@@ -4,8 +4,8 @@ var UpdateDrug = require("./scripts/updatedrug");
 var LogIn = require("./scripts/Login");
 var firebase = require("./scripts/firebase");
 var auth = require("./scripts/auth");
-require("../dist/styles.a0d6e6964dd193022a55.css");
-//require("./styles/global.scss");
+//require("../dist/styles.a0d6e6964dd193022a55.css");
+require("./styles/global.scss");
 
 const _addDrug = new AddDrug();
 _addDrug.init();
