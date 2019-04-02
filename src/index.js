@@ -41,6 +41,17 @@ const formModalSaveBtn = formModal.querySelector('.btn-save');
 formModalSaveBtn.addEventListener('click', (e) => {
 	e.preventDefault();
 
+	var inputDrugName;
+	const inputname = inputName.value;
+	const inputName_uppercase = inputname.toUpperCase();
+	if (inputname != inputName_uppercase)
+	{
+		inputDrugName = inputName_uppercase;
+	}
+	else{
+		inputDrugName = inputname;
+	}
+
 	var toxicityCheckboxes = document.getElementsByName('toxicity');
 	var pregnancyCheckboxes = document.getElementsByName('pregnancy');
 	var toxicity = "";
@@ -61,7 +72,7 @@ formModalSaveBtn.addEventListener('click', (e) => {
   }
   else {
      rootRef.push().set({
-       Name:inputName.value,
+       Name:inputDrugName,
        breastfeeding_category:inputCatBreast.value,
 	     toxicity_to:toxicity,
        pregnancy_category:cat_pregnancy,
@@ -211,7 +222,17 @@ const bindEvents = () => {
         e.preventDefault();
 
         if(activeID) {
-          const Name = inputName.value;
+					var inputDrugName;
+          const drugName = inputName.value;
+					const drugName_uppercase = drugName.toUpperCase();
+					if (drugName != drugName_uppercase)
+					{
+						inputDrugName = drugName_uppercase;
+					}
+					else{
+						inputDrugName = drugName;
+					}
+
           const breastfeeding_category = inputCatBreast.value;
           const indications = inputIndications.value;
           const dosages = inputDosages.value;
@@ -229,7 +250,7 @@ const bindEvents = () => {
           if (cat_pregnancy) cat_pregnancy = cat_pregnancy.substring(1);
 
           database.ref(`drugs/${activeID}`).update({
-              'Name': Name,
+              'Name': inputDrugName,
               'breastfeeding_category': breastfeeding_category,
               'toxicity_to': toxicity,
               'pregnancy_category': cat_pregnancy,
@@ -275,10 +296,10 @@ const deleteDrug = () => {
 
       if(activeID){
         database.ref(`drugs/${activeID}`).remove();
-		window.alert("Deleted Successfully!");
-		delModal.classList.remove('is-active');
-		window.location.reload(true); //CODE TO REFRESH PAGE
-		activeID = null;
+				window.alert("Deleted Successfully!");
+				delModal.classList.remove('is-active');
+				window.location.reload(true); //CODE TO REFRESH PAGE
+				activeID = null;
       };
     });
   });
@@ -346,8 +367,19 @@ saveJSON.addEventListener('click', () => {
     for (var i = 0; i < obj.length; i++) {
     var counter = obj[i];
 
+		var inputDrugName;
+		const inputname = counter.Name;
+		const inputName_uppercase = inputname.toUpperCase();
+		if (inputname != inputName_uppercase)
+		{
+			inputDrugName = inputName_uppercase;
+		}
+		else{
+			inputDrugName = inputname;
+		}
+
      rootRef.push().set({
-       Name: counter.Name,
+       Name: inputDrugName,
        breastfeeding_category: counter.breastfeeding_category,
 	     toxicity_to: counter.toxicity_to,
        pregnancy_category: counter.pregnancy_category,
